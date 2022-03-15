@@ -248,6 +248,14 @@ public class @Defaultinput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""FireBullet"",
+                    ""type"": ""Button"",
+                    ""id"": ""028ff9fe-98f4-4c07-ab76-a40fc822907e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -272,6 +280,17 @@ public class @Defaultinput : IInputActionCollection, IDisposable
                     ""action"": ""Fire2Released"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c23ca41-ce9b-44c7-b6bf-06345697f368"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireBullet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -292,6 +311,7 @@ public class @Defaultinput : IInputActionCollection, IDisposable
         m_Weapon = asset.FindActionMap("Weapon", throwIfNotFound: true);
         m_Weapon_Fire2Pressed = m_Weapon.FindAction("Fire2Pressed", throwIfNotFound: true);
         m_Weapon_Fire2Released = m_Weapon.FindAction("Fire2Released", throwIfNotFound: true);
+        m_Weapon_FireBullet = m_Weapon.FindAction("FireBullet", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -432,12 +452,14 @@ public class @Defaultinput : IInputActionCollection, IDisposable
     private IWeaponActions m_WeaponActionsCallbackInterface;
     private readonly InputAction m_Weapon_Fire2Pressed;
     private readonly InputAction m_Weapon_Fire2Released;
+    private readonly InputAction m_Weapon_FireBullet;
     public struct WeaponActions
     {
         private @Defaultinput m_Wrapper;
         public WeaponActions(@Defaultinput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Fire2Pressed => m_Wrapper.m_Weapon_Fire2Pressed;
         public InputAction @Fire2Released => m_Wrapper.m_Weapon_Fire2Released;
+        public InputAction @FireBullet => m_Wrapper.m_Weapon_FireBullet;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -453,6 +475,9 @@ public class @Defaultinput : IInputActionCollection, IDisposable
                 @Fire2Released.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFire2Released;
                 @Fire2Released.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFire2Released;
                 @Fire2Released.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFire2Released;
+                @FireBullet.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireBullet;
+                @FireBullet.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireBullet;
+                @FireBullet.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireBullet;
             }
             m_Wrapper.m_WeaponActionsCallbackInterface = instance;
             if (instance != null)
@@ -463,6 +488,9 @@ public class @Defaultinput : IInputActionCollection, IDisposable
                 @Fire2Released.started += instance.OnFire2Released;
                 @Fire2Released.performed += instance.OnFire2Released;
                 @Fire2Released.canceled += instance.OnFire2Released;
+                @FireBullet.started += instance.OnFireBullet;
+                @FireBullet.performed += instance.OnFireBullet;
+                @FireBullet.canceled += instance.OnFireBullet;
             }
         }
     }
@@ -482,5 +510,6 @@ public class @Defaultinput : IInputActionCollection, IDisposable
     {
         void OnFire2Pressed(InputAction.CallbackContext context);
         void OnFire2Released(InputAction.CallbackContext context);
+        void OnFireBullet(InputAction.CallbackContext context);
     }
 }
