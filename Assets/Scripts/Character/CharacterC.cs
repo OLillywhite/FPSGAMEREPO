@@ -178,10 +178,7 @@ public class CharacterC : MonoBehaviour
             horizontalSpeed = playerSettings.RunningStrafeSpeed;
         }
 
-        if (!isGrounded)
-        {
-            playerSettings.SpeedEffector = playerSettings.FallingSpeedEffector;
-        }
+        
         else if (playerStance == PlayerStance.Crouch)
         {
             playerSettings.SpeedEffector = playerSettings.CrouchSpeedEffector;
