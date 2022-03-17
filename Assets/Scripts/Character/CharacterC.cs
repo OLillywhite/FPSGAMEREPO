@@ -115,7 +115,16 @@ public class CharacterC : MonoBehaviour
 
     private void AimingInPressed()
     {
-        isAimingIn = true;
+
+        if (isSprinting)
+        {
+            isAimingIn = false;
+        }
+
+        if (!isSprinting)
+        {
+            isAimingIn = true;
+        }
     }
 
     private void AimingInReleased()
