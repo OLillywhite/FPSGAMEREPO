@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    // Start is called before the first frame update
-
+    public Animator animator;
     public float health = 50f;
 
 
@@ -14,10 +13,15 @@ public class Target : MonoBehaviour
         {
             Die();
         }
+       
     }
 
     void Die()
     {
+        animator.SetTrigger("Death");
+
+        new WaitForSeconds(2);
+
         Destroy(gameObject);
     }
 
