@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class ProjectileBehavior : MonoBehaviour
 {
-    public AudioSource zombiesound;
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.collider.gameObject.tag.Equals("Player"))
+        {
+            CharacterHealth characterHealth = collision.collider.gameObject.GetComponent<CharacterHealth>();
+
+
+            characterHealth.TakeDamage(30);
+        }
+
+
     }
 }

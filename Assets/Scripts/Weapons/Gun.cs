@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-
+    [SerializeField] CharacterC player;
     public AudioSource bulletSound;
     public float damage = 10f;
     public float range = 100f;
@@ -32,34 +32,37 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
-        muzzleflash.Play();
-        bulletSound.Play();
-
-        RaycastHit hit;
-        if (Physics.Raycast(fpscamera.transform.position, fpscamera.transform.forward, out hit, range))
+        if (!player.isSprinting)
         {
-            UnityEngine.Debug.Log(hit.transform.name);
+            muzzleflash.Play();
+            bulletSound.Play();
 
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null)
+            RaycastHit hit;
+            if (Physics.Raycast(fpscamera.transform.position, fpscamera.transform.forward, out hit, range))
             {
-                target.TakeDamage(damage);
-            }
+                // UnityEngine.Debug.Log(hit.transform.name);
 
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
-            }
+                Target target = hit.transform.GetComponent<Target>();
+                if (target != null)
+                {
+                    target.TakeDamage(damage);
+                }
 
-            EnemyDamage e = hit.transform.GetComponent<EnemyDamage>();
-            if (e != null)
-            {
-                e.TakeDamage(damageAmount);
-                return;
-            }
+                if (hit.rigidbody != null)
+                {
+                    hit.rigidbody.AddForce(-hit.normal * impactForce);
+                }
 
-            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impactGO, 2f);
+                EnemyDamage e = hit.transform.GetComponent<EnemyDamage>();
+                if (e != null)
+                {
+                    e.TakeDamage(damageAmount);
+                    return;
+                }
+
+                GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impactGO, 2f);
+            }
         }
 
     }
