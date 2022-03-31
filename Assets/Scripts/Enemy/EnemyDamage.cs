@@ -9,6 +9,7 @@ public class EnemyDamage : MonoBehaviour
     public Transform projectilePoint;
     public AudioSource Zombiesound;
     public Animator animator;
+    public AudioSource Bruh;
     public void shoot()
     {
         Rigidbody rb = Instantiate(projectile, projectilePoint.position, Quaternion.identity).GetComponent<Rigidbody>();
@@ -24,6 +25,8 @@ public class EnemyDamage : MonoBehaviour
             animator.SetTrigger("Death");
             //new WaitForSeconds(3);
             GetComponent<CapsuleCollider>().enabled = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+            Bruh.Play();
         }
         //else
         //{

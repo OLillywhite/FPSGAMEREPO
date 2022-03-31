@@ -11,7 +11,8 @@ public class CharacterC : MonoBehaviour
     public Vector2 input_Movement;
     [HideInInspector]
     public Vector2 input_View;
-    
+    public Gun gun;
+
     private Vector3 newCameraRotation;
     private Vector3 newCharacterRotation;
 
@@ -115,6 +116,7 @@ public class CharacterC : MonoBehaviour
 
     private void AimingInPressed()
     {
+        
 
         if (isSprinting)
         {
@@ -124,6 +126,11 @@ public class CharacterC : MonoBehaviour
         if (!isSprinting)
         {
             isAimingIn = true;
+        }
+
+        if (gun.currentlyReloading)
+        {
+            isAimingIn = false;
         }
     }
 
@@ -164,7 +171,7 @@ public class CharacterC : MonoBehaviour
     {
         newCharacterRotation.y += (isAimingIn ? playerSettings.ViewXSensitivity * playerSettings.AimingSensitivityEffector : playerSettings.ViewXSensitivity) * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(newCharacterRotation);
-        
+
         newCameraRotation.x += (isAimingIn ? playerSettings.ViewYSensitivity * playerSettings.AimingSensitivityEffector : playerSettings.ViewYSensitivity) * (playerSettings.ViewYInverted ? input_View.y : -input_View.y) * Time.deltaTime;
         newCameraRotation.x = Mathf.Clamp(newCameraRotation.x, viewClampYMin, viewClampYMax);
 
@@ -172,7 +179,7 @@ public class CharacterC : MonoBehaviour
     }
 
     private void CalculateMovement()
-    {   
+    {
         if (input_Movement.y <= 0.2f)
         {
             isSprinting = false;
@@ -187,7 +194,7 @@ public class CharacterC : MonoBehaviour
             horizontalSpeed = playerSettings.RunningStrafeSpeed;
         }
 
-        
+
         else if (playerStance == PlayerStance.Crouch)
         {
             playerSettings.SpeedEffector = playerSettings.CrouchSpeedEffector;
@@ -204,7 +211,7 @@ public class CharacterC : MonoBehaviour
         {
             playerSettings.SpeedEffector = 1;
         }
-        
+
         weaponAnimationSpeed = characterController.velocity.magnitude / (playerSettings.WalkingForwardSpeed * playerSettings.SpeedEffector);
 
         if (weaponAnimationSpeed > 1)
@@ -215,7 +222,7 @@ public class CharacterC : MonoBehaviour
         verticleSpeed *= playerSettings.SpeedEffector;
         horizontalSpeed *= playerSettings.SpeedEffector;
 
-        newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horizontalSpeed * input_Movement.x * Time.deltaTime, 0, verticleSpeed * input_Movement.y * Time.deltaTime), ref newMovementSpeedVelocity, isGrounded ? playerSettings.MovementSmoothing : playerSettings.FallingSmoothing);
+        newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horizontalSpeed * input_Movement.x * Time.deltaTime, 0, verticleSpeed * input_Movement.y * Time.deltaTime), ref newMovementSpeedVelocity, playerSettings.MovementSmoothing, playerSettings.FallingSmoothing);
         var movementSpeed = transform.TransformDirection(newMovementSpeed);
 
         if (playerGravity > gravityMin)
@@ -223,10 +230,10 @@ public class CharacterC : MonoBehaviour
             playerGravity -= gravityAmount * Time.deltaTime;
         }
 
-        if (playerGravity < -0.1f && isGrounded)
-        {
-            playerGravity = -0.1f;
-        }
+        //if (playerGravity < -0.1f && isGrounded)
+        //{
+        //    playerGravity = -0.1f;
+        //}
 
         movementSpeed.y += playerGravity;
         movementSpeed += jumpingForce * Time.deltaTime;
@@ -358,4 +365,5 @@ public class CharacterC : MonoBehaviour
     }
 
     #endregion
+
 }
