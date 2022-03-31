@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 4500.542, g: 2457.8262, b: 1738.8516, a: 1}
+  m_IndirectSpecularColor: {r: 4609.256, g: 2478.9434, b: 1664.377, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3016,7 +3016,9 @@ MonoBehaviour:
   ammoMax: 30
   currentAmmo: 0
   currentlyReloading: 0
+  currentlyInspecting: 0
   reloadTime: 4
+  InspectTime: 3
   anim: {fileID: 344286653}
   fpscamera: {fileID: 214214242}
   muzzleflash: {fileID: 2932524639332747152}
