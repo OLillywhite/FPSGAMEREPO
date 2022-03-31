@@ -15,7 +15,9 @@ public class Gun : MonoBehaviour
     public int ammoMax = 30;
     public int currentAmmo;
     public bool currentlyReloading;
+    public bool currentlyInspecting;
     public float reloadTime = 2f;
+    public float InspectTime = 2f;
 
     [SerializeField] Animator anim;
 
@@ -45,6 +47,11 @@ public class Gun : MonoBehaviour
             Shoot();
         }
 
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            StartCoroutine("InspectGun");
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             if(currentAmmo < ammoMax)
@@ -65,51 +72,53 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
-        if (!player.isSprinting)
+        if (!currentlyInspecting)
         {
-
-            if (!currentlyReloading)
+            if (!player.isSprinting)
             {
-                if (currentAmmo == 0)
-                {
-                    gunEmpty.Play();
-                }
 
-                else if (currentAmmo >= 1)
+                if (!currentlyReloading)
                 {
-                    muzzleflash.Play();
-                    bulletSound.Play();
-                    currentAmmo--;
-                    RaycastHit hit;
-                    if (Physics.Raycast(fpscamera.transform.position, fpscamera.transform.forward, out hit, range))
+                    if (currentAmmo == 0)
                     {
-                        // UnityEngine.Debug.Log(hit.transform.name);
-
-                        Target target = hit.transform.GetComponent<Target>();
-                        if (target != null)
-                        {
-                            target.TakeDamage(damage);
-                        }
-
-                        if (hit.rigidbody != null)
-                        {
-                            hit.rigidbody.AddForce(-hit.normal * impactForce);
-                        }
-
-                        EnemyDamage e = hit.transform.GetComponent<EnemyDamage>();
-                        if (e != null)
-                        {
-                            e.TakeDamage(damageAmount);
-                            return;
-                        }
-
-                        GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-                        Destroy(impactGO, 2f);
+                        gunEmpty.Play();
                     }
 
+                    else if (currentAmmo >= 1)
+                    {
+                        muzzleflash.Play();
+                        bulletSound.Play();
+                        currentAmmo--;
+                        RaycastHit hit;
+                        if (Physics.Raycast(fpscamera.transform.position, fpscamera.transform.forward, out hit, range))
+                        {
+                            // UnityEngine.Debug.Log(hit.transform.name);
+
+                            Target target = hit.transform.GetComponent<Target>();
+                            if (target != null)
+                            {
+                                target.TakeDamage(damage);
+                            }
+
+                            if (hit.rigidbody != null)
+                            {
+                                hit.rigidbody.AddForce(-hit.normal * impactForce);
+                            }
+
+                            EnemyDamage e = hit.transform.GetComponent<EnemyDamage>();
+                            if (e != null)
+                            {
+                                e.TakeDamage(damageAmount);
+                                return;
+                            }
+
+                            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                            Destroy(impactGO, 2f);
+                        }
+
+                    }
                 }
             }
-
             
         }
 
@@ -129,5 +138,15 @@ public class Gun : MonoBehaviour
         }
 
         currentlyReloading = false;
+    }
+
+    IEnumerator InspectGun()
+    {
+        currentlyInspecting = true;
+    
+        anim.SetTrigger("InspectActive");
+        yield return new WaitForSeconds(InspectTime);
+
+        currentlyInspecting = false;
     }
 }

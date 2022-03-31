@@ -132,6 +132,11 @@ public class CharacterC : MonoBehaviour
         {
             isAimingIn = false;
         }
+
+        if(gun.currentlyInspecting)
+        {
+            isAimingIn = false;
+        }
     }
 
     private void AimingInReleased()
