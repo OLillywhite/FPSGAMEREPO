@@ -10,6 +10,8 @@ public class EnemyDamage : MonoBehaviour
     public AudioSource Zombiesound;
     public Animator animator;
     public AudioSource Bruh;
+    public CharacterCash characterCash;
+    public GameObject Player;
     public void shoot()
     {
         Rigidbody rb = Instantiate(projectile, projectilePoint.position, Quaternion.identity).GetComponent<Rigidbody>();
@@ -26,6 +28,7 @@ public class EnemyDamage : MonoBehaviour
             //new WaitForSeconds(3);
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Rigidbody>().isKinematic = true;
+            Player.GetComponent<CharacterCash>().AddCash(500f);
             Bruh.Play();
         }
         //else
