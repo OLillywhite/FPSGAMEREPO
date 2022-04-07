@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class HealthPerk : MonoBehaviour
+public class SpeedPerk : MonoBehaviour
 {
     public GameObject PerkUI;
     public GameObject player;
     public GameObject BrokeBoiUI;
-    public float PerkCost = 3500f;
+    public float PerkCost = 2750f;
     bool triggered = false;
     public AudioSource Purchased;
 
@@ -43,13 +43,16 @@ public class HealthPerk : MonoBehaviour
     void Purchase()
     {
         CharacterCash Charactercash = player.GetComponent<CharacterCash>();
-        CharacterHealth Characterhealth = player.GetComponent<CharacterHealth>();
+        CharacterC characterC = player.GetComponent<CharacterC>();
 
         if (PerkCost <= Charactercash.Cash)
         {
             Charactercash.TakeCash(PerkCost);
-            Characterhealth.MaxHealth = 150f;
-            Characterhealth.health = Characterhealth.MaxHealth;
+            characterC.playerSettings.RunningForwardSpeed = 8.5f;
+            characterC.playerSettings.RunningStrafeSpeed = 5.5f;
+            characterC.playerSettings.WalkingForwardSpeed = 6.5f;
+            characterC.playerSettings.WalkingStrafeSpeed = 3.5f;
+            characterC.playerSettings.WalkingBackwardsSpeed = 2.5f;
             Pickup();
         }
 

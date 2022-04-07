@@ -4,20 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class HealthPerk : MonoBehaviour
+public class Medkit : MonoBehaviour
 {
     public GameObject PerkUI;
     public GameObject player;
     public GameObject BrokeBoiUI;
-    public float PerkCost = 3500f;
+    public GameObject Declined;
+    public float PerkCost = 1250f;
     bool triggered = false;
+    bool decline = false;
     public AudioSource Purchased;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && triggered)
+        if (Input.GetKeyDown(KeyCode.E) && triggered && !decline)
         {
             Purchase();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && triggered && decline)
+        {
+            Declined.SetActive(true);
+            return;
         }
     }
 
@@ -37,6 +45,8 @@ public class HealthPerk : MonoBehaviour
             triggered = false;
             PerkUI.SetActive(false);
             BrokeBoiUI.SetActive(false);
+            Declined.SetActive(false);
+            decline = false;
         }
     }
 
@@ -45,15 +55,21 @@ public class HealthPerk : MonoBehaviour
         CharacterCash Charactercash = player.GetComponent<CharacterCash>();
         CharacterHealth Characterhealth = player.GetComponent<CharacterHealth>();
 
-        if (PerkCost <= Charactercash.Cash)
+        if (Characterhealth.health == Characterhealth.MaxHealth)
+        {
+           
+            PerkUI.SetActive(false);
+            decline = true;
+        }
+
+        if (PerkCost <= Charactercash.Cash && !decline)
         {
             Charactercash.TakeCash(PerkCost);
-            Characterhealth.MaxHealth = 150f;
             Characterhealth.health = Characterhealth.MaxHealth;
             Pickup();
         }
 
-        else
+        if(PerkCost > Charactercash.Cash)
         {
             BrokeBoiUI.SetActive(true);
             PerkUI.SetActive(false);
@@ -65,6 +81,6 @@ public class HealthPerk : MonoBehaviour
     {
         PerkUI.SetActive(false);
         Purchased.Play();
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
