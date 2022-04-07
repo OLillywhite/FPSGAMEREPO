@@ -30,6 +30,7 @@ public class EnemyDamage : MonoBehaviour
             GetComponent<Rigidbody>().isKinematic = true;
             Player.GetComponent<CharacterCash>().AddCash(275f);
             Bruh.Play();
+            StartCoroutine(DeathTimer());
         }
         //else
         //{
@@ -39,5 +40,12 @@ public class EnemyDamage : MonoBehaviour
     public void sound()
     {
         Zombiesound.Play();
+    }
+
+    IEnumerator DeathTimer()
+    {
+        yield return new WaitForSeconds(20);
+        Destroy(gameObject);
+        
     }
 }
