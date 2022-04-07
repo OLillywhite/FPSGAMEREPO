@@ -8,6 +8,8 @@ public class CharacterHealth : MonoBehaviour
     public GameObject DeathUI;
     public GameObject HealthUI;
     public GameObject player;
+    public float MaxHealth = 100f;
+
     public void TakeDamage(float amount)
     {
         health -= amount;

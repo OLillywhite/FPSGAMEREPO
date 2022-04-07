@@ -11,4 +11,9 @@ public class CharacterCash : MonoBehaviour
     {
         Cash += amount;
     }
+
+    public void TakeCash(float amount)
+    {
+        Cash -= amount;
+    }
 }
