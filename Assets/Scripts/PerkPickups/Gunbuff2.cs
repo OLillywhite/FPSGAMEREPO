@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class Gunbuff : MonoBehaviour
+public class Gunbuff2 : MonoBehaviour
 {
     public GameObject PerkUI;
     public GameObject player;
     public GameObject BrokeBoiUI;
-    public float PerkCost = 5000f;
+    public float PerkCost = 10000f;
     bool triggered = false;
     public AudioSource Purchased;
     public GameObject GunOBJ;
     public GameObject normalskin;
     public GameObject buffskin;
-    public GameObject gunBuff2;
+    //public GameObject gunBuff3;
 
     void Update()
     {
@@ -60,13 +60,12 @@ public class Gunbuff : MonoBehaviour
         if (PerkCost <= Charactercash.Cash)
         {
             Charactercash.TakeCash(PerkCost);
-            weaponStats.damageAmount = 25;
-            weaponStats.fireRate = 8;
-            weaponStats.ammoMax = 50;
+            weaponStats.damageAmount = 35;
+            weaponStats.fireRate = 10;
+            weaponStats.ammoMax = 65;
             weaponStats.currentAmmo = weaponStats.ammoMax;
             buffskin.SetActive(true);
             normalskin.SetActive(false);
-            gunBuff2.SetActive(true);
             Pickup();
         }
 
@@ -82,6 +81,7 @@ public class Gunbuff : MonoBehaviour
     {
         PerkUI.SetActive(false);
         Purchased.Play();
+        //gunBuff3.SetActive(true);
         Destroy(gameObject);
     }
 }
