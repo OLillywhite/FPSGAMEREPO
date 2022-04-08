@@ -28,7 +28,7 @@ public class EnemyDamage : MonoBehaviour
             //new WaitForSeconds(3);
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Rigidbody>().isKinematic = true;
-            Player.GetComponent<CharacterCash>().AddCash(275f);
+            Player.GetComponent<CharacterCash>().AddCash(125f);
             Bruh.Play();
             StartCoroutine(DeathTimer());
         }

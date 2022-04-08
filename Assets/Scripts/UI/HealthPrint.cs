@@ -10,7 +10,7 @@ public class HealthPrint : MonoBehaviour
     public void Update()
     {
         HealthFloat = GameObject.FindWithTag("Player").GetComponent<CharacterHealth>().health;
-        HealthUI.GetComponent<Text>().text = "Health: " + HealthFloat;
+        HealthUI.GetComponent<Text>().text = "" + HealthFloat;
     }
 }
 
