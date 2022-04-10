@@ -40,9 +40,11 @@ public class EnemyWaveSpawn : MonoBehaviour
         }
 
         spawnRate -= 0.1f;
-        enemyCount += 5;
+        enemyCount += 2;
         waveCount += 1;
         timeBetweenWaves += 4f;
+        enemy.GetComponent<EnemyDamage>().AddHP(5);
+
 
         yield return new WaitForSeconds(timeBetweenWaves);
 

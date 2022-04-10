@@ -29,6 +29,7 @@ public class EnemyDamage : MonoBehaviour
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Rigidbody>().isKinematic = true;
             Player.GetComponent<CharacterCash>().AddCash(125f);
+            Player.GetComponent<KillCounter>().AddKill(1);
             Bruh.Play();
             StartCoroutine(DeathTimer());
         }
@@ -37,6 +38,12 @@ public class EnemyDamage : MonoBehaviour
         //    animator.SetTrigger("Damage");
         //}
     }
+
+    public void AddHP(int amount)
+    {
+        enemyHP += amount;
+    }
+
     public void sound()
     {
         Zombiesound.Play();
