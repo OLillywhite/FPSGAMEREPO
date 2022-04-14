@@ -12,6 +12,7 @@ public class HealthPerk : MonoBehaviour
     public float PerkCost = 3500f;
     bool triggered = false;
     public AudioSource Purchased;
+    public GameObject lvl2obj;
 
     void Update()
     {
@@ -65,6 +66,7 @@ public class HealthPerk : MonoBehaviour
     {
         PerkUI.SetActive(false);
         Purchased.Play();
+        lvl2obj.SetActive(true);
         Destroy(gameObject);
     }
 }
