@@ -7,7 +7,6 @@ public class EnemyDamage : MonoBehaviour
     public int enemyHP = 100;
     public GameObject projectile;
     public Transform projectilePoint;
-    public AudioSource Zombiesound;
     public Animator animator;
     public AudioSource Bruh;
     public CharacterCash characterCash;
@@ -42,11 +41,6 @@ public class EnemyDamage : MonoBehaviour
     public void AddHP(int amount)
     {
         enemyHP += amount;
-    }
-
-    public void sound()
-    {
-        Zombiesound.Play();
     }
 
     IEnumerator DeathTimer()
