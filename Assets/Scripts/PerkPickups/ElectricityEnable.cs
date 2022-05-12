@@ -68,6 +68,6 @@ public class ElectricityEnable : MonoBehaviour
         PerkUI.SetActive(false);
         Purchased.Play();
         OnOBJ.SetActive(true);
-        Destroy(gameObject);
+        Destroy(GetComponent("SphereCollider"));
     }
 }

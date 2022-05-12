@@ -17,6 +17,8 @@ public class TimeDoorPurchase : MonoBehaviour
     public GameObject door;
     public Animator dooranimator;
 
+    public GameObject TimeMachine;
+
     public void Awake()
     {
         dooranimator = door.GetComponent<Animator>();
@@ -32,7 +34,7 @@ public class TimeDoorPurchase : MonoBehaviour
             Purchase();
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && triggered && !Electricityenable.ElectricityOn)
+        else if (Input.GetKeyDown(KeyCode.E) && triggered && !Electricityenable.ElectricityOn)
         {
             NoElectricityUI.SetActive(true);
         }
@@ -61,9 +63,8 @@ public class TimeDoorPurchase : MonoBehaviour
     void Purchase()
     {
         CharacterCash Charactercash = player.GetComponent<CharacterCash>();
-        ElectricityEnable Electricityenable = ElectricityOBJ.GetComponent<ElectricityEnable>();
 
-        if (PerkCost <= Charactercash.Cash && !Electricityenable.ElectricityOn)
+        if (PerkCost <= Charactercash.Cash)
         {
 
             dooranimator.SetBool("IsPurchased", true);
@@ -86,5 +87,6 @@ public class TimeDoorPurchase : MonoBehaviour
         PerkUI.SetActive(false);
         Purchased.Play();
         Destroy(gameObject);
+        TimeMachine.SetActive(true);
     }
 }
