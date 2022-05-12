@@ -69,5 +69,6 @@ public class ElectricityEnable : MonoBehaviour
         Purchased.Play();
         OnOBJ.SetActive(true);
         Destroy(GetComponent("SphereCollider"));
+        triggered = false;
     }
 }
