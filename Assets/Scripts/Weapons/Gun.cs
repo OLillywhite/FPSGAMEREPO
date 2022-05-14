@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
@@ -41,7 +41,7 @@ public class Gun : MonoBehaviour
     {
         limit();
 
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire && PauseMenu.GameIsPaused == false)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();

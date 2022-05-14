@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using static scr_Models;
 
 public class WeaponC : MonoBehaviour
@@ -116,47 +116,52 @@ public class WeaponC : MonoBehaviour
 
     private void SetWeaponAnimations()
     {
-        if (isGroundedTrigger)
+        if (PauseMenu.GameIsPaused == false)
         {
-            fallingDelay = 0;
-        }
-        else
-        {
-            fallingDelay += Time.deltaTime;
-        }
+            if (isGroundedTrigger)
+            {
+                fallingDelay = 0;
+            }
+            else
+            {
+                fallingDelay += Time.deltaTime;
+            }
 
-        if (characterController.isGrounded && !isGroundedTrigger && fallingDelay > 0.1f)
-        {
-            weaponAnimator.SetTrigger("Land");
-            isGroundedTrigger = true;
-        }
+            if (characterController.isGrounded && !isGroundedTrigger && fallingDelay > 0.1f)
+            {
+                weaponAnimator.SetTrigger("Land");
+                isGroundedTrigger = true;
+            }
 
-        if (!characterController.isGrounded && isGroundedTrigger)
-        {
-            Debug.Log("Trigger Falling");
-            weaponAnimator.SetTrigger("Falling");
-            isGroundedTrigger = false;
-        }
+            if (!characterController.isGrounded && isGroundedTrigger)
+            {
+                Debug.Log("Trigger Falling");
+                weaponAnimator.SetTrigger("Falling");
+                isGroundedTrigger = false;
+            }
 
-        weaponAnimator.SetBool("IsSprinting", characterController.isSprinting);
-        weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);
+            weaponAnimator.SetBool("IsSprinting", characterController.isSprinting);
+            weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);
+        }
     }
 
     private void CalculateWeaponSway()
     {
-        var targetPosition = LissajousCurve(swayTime, swayAmountA, swayAmountB) / (isAimingIn ? swayScale * 3 : swayScale);
+        if (PauseMenu.GameIsPaused == false) {
+            var targetPosition = LissajousCurve(swayTime, swayAmountA, swayAmountB) / (isAimingIn ? swayScale * 3 : swayScale);
 
-        swayPosition = Vector3.Lerp(swayPosition, targetPosition, Time.smoothDeltaTime * swayLerpSpeed);
-        swayTime += Time.deltaTime;
+            swayPosition = Vector3.Lerp(swayPosition, targetPosition, Time.smoothDeltaTime * swayLerpSpeed);
+            swayTime += Time.deltaTime;
 
-        if (swayTime > 6.3f)
-        {
-            swayTime = 0;
+            if (swayTime > 6.3f)
+            {
+                swayTime = 0;
+            }
         }
-    }
 
-    private Vector3 LissajousCurve(float Time, float A, float B)
-    {
-        return new Vector3(Mathf.Sin(Time), A * Mathf.Sin(B * Time + Mathf.PI));
+        Vector3 LissajousCurve(float Time, float A, float B)
+        {
+            return new Vector3(Mathf.Sin(Time), A * Mathf.Sin(B * Time + Mathf.PI));
+        }
     }
 }

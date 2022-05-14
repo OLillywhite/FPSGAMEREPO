@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static scr_Models;
@@ -243,7 +243,10 @@ public class CharacterC : MonoBehaviour
         movementSpeed.y += playerGravity;
         movementSpeed += jumpingForce * Time.deltaTime;
 
-        characterController.Move(movementSpeed);
+        if (PauseMenu.GameIsPaused == false)
+        {
+            characterController.Move(movementSpeed);
+        }
     }
 
     #endregion

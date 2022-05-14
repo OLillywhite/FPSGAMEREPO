@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 4610.129, g: 2479.2012, b: 1664.3926, a: 1}
+  m_IndirectSpecularColor: {r: 4527.746, g: 2489.2832, b: 1785.332, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9360,7 +9360,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PerkUI: {fileID: 1094751400}
   player: {fileID: 284444572}
+  BrokeBoiUI: {fileID: 0}
   PerkCost: 500
+  Purchased: {fileID: 0}
+  lvl2obj: {fileID: 0}
 --- !u!135 &1342687775
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9653,7 +9656,6 @@ MonoBehaviour:
   enemyHP: 100
   projectile: {fileID: 989309623}
   projectilePoint: {fileID: 352988321}
-  Zombiesound: {fileID: 1779853516}
   animator: {fileID: 1381732546}
   Bruh: {fileID: 874113769}
   characterCash: {fileID: 284444581}
@@ -13436,7 +13438,6 @@ MonoBehaviour:
   enemyHP: 100
   projectile: {fileID: 1126720186}
   projectilePoint: {fileID: 553856786}
-  Zombiesound: {fileID: 1779853516}
   animator: {fileID: 1953024563}
   Bruh: {fileID: 874113769}
   characterCash: {fileID: 284444581}
@@ -14393,7 +14394,6 @@ MonoBehaviour:
   enemyHP: 100
   projectile: {fileID: 210116216}
   projectilePoint: {fileID: 190586781}
-  Zombiesound: {fileID: 1779853516}
   animator: {fileID: 2086605392}
   Bruh: {fileID: 874113769}
   characterCash: {fileID: 284444581}
@@ -16071,7 +16071,6 @@ MonoBehaviour:
   enemyHP: 100
   projectile: {fileID: 1701344055}
   projectilePoint: {fileID: 855480209}
-  Zombiesound: {fileID: 1779853516}
   animator: {fileID: 2591805392816341080}
   Bruh: {fileID: 874113769}
   characterCash: {fileID: 284444581}
