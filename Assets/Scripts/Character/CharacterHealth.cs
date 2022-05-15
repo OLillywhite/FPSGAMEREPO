@@ -38,6 +38,8 @@ public class CharacterHealth : MonoBehaviour
         HUDUI.SetActive(false);
         GameOverUI.SetActive(false);
         GameOverTXT.SetActive(true);
+        PauseMenu.GameIsPaused = true;
         TimeTrig.GameIsOver = true;
+        Time.timeScale = 0f;
     }
 }
