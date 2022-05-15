@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,6 +51,7 @@ public class HankEasteregg : MonoBehaviour
         CharacterCash Charactercash = player.GetComponent<CharacterCash>();
         
             Charactercash.AddCash(CashGive);
+            Charactercash.AddTotalCash(CashGive);
             Pickup();
 
     }

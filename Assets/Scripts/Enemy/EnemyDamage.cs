@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +27,8 @@ public class EnemyDamage : MonoBehaviour
             //new WaitForSeconds(3);
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Rigidbody>().isKinematic = true;
-            Player.GetComponent<CharacterCash>().AddCash(125f);
+            Player.GetComponent<CharacterCash>().AddCash(195f);
+            Player.GetComponent<CharacterCash>().AddTotalCash(195f);
             Player.GetComponent<KillCounter>().AddKill(1);
             Bruh.Play();
             StartCoroutine(DeathTimer());

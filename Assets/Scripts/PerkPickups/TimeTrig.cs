@@ -9,7 +9,14 @@ public class TimeTrig : MonoBehaviour
     public GameObject PerkUI;
     public GameObject player;
     bool triggered = false;
+    public static bool GameIsOver = false;
     public AudioSource TimeSound;
+    public GameObject GameOverUI;
+    public GameObject GameCompleteUI;
+    public GameObject PauseMenuUI;
+    public GameObject UICube;
+    public GameObject HUDUI;
+    public GameObject WaveUI;
 
     void Update()
     {
@@ -45,7 +52,15 @@ public class TimeTrig : MonoBehaviour
 
     void Pickup()
     {
+        PauseMenuUI.SetActive(false);
+        UICube.SetActive(false);
+        HUDUI.SetActive(false);
+        WaveUI.SetActive(false);
+        GameOverUI.SetActive(true);
+        GameCompleteUI.SetActive(true);
+        PauseMenu.GameIsPaused = true;
         PerkUI.SetActive(false);
+        GameIsOver = true;
         TimeSound.Play();
     }
 }
