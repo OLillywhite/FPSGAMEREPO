@@ -8,11 +8,20 @@ public class StartUI : MonoBehaviour
     public GameObject HUDUI;
     public GameObject PerkUI;
     public GameObject WaveUI;
+    public GameObject Canvas;
+    public GameObject Startstuff;
+    public Animator Canvasanim;
 
-        void Start()
+
+    public void Awake()
+    {
+        Canvasanim = Canvas.GetComponent<Animator>();
+    }
+    void Start()
     {
         Time.timeScale = 0f;
         PauseMenu.GameIsPaused = true;
+        TimeTrig.GameIsOver = true;
     }
 
     public void Gamestart()
@@ -23,6 +32,8 @@ public class StartUI : MonoBehaviour
         HUDUI.SetActive(true);
         PerkUI.SetActive(true);
         WaveUI.SetActive(true);
-        Destroy(gameObject);
+        Startstuff.SetActive(false);
+        Canvasanim.SetBool("GameStart", true);
+        TimeTrig.GameIsOver = false;
     }
 }
