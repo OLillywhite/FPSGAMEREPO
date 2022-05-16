@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +9,7 @@ public class CollisionBehavior : MonoBehaviour
         if (collision.collider.gameObject.tag.Equals("Player"))
         {
             CharacterHealth characterHealth = collision.collider.gameObject.GetComponent<CharacterHealth>();
-
-
-            characterHealth.TakeDamage(15);
+            characterHealth.TakeDamage(7);
         }
 
 

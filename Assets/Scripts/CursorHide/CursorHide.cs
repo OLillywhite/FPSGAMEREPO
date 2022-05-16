@@ -9,13 +9,13 @@ public class CursorHide : MonoBehaviour
         if (PauseMenu.GameIsPaused == true)
         {
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None; // Cursor is now locked to screen
+            Cursor.lockState = CursorLockMode.None;
         }
         if (PauseMenu.GameIsPaused == false)
         {
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked; // Cursor is now locked to screen
+            Cursor.lockState = CursorLockMode.Locked;
         }
+
     }
-        
 }
