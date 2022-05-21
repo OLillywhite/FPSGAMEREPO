@@ -11,7 +11,7 @@ public class StartUI : MonoBehaviour
     public GameObject Canvas;
     public GameObject Startstuff;
     public Animator Canvasanim;
-
+    public GameObject txtobj;
 
     public void Awake()
     {
@@ -26,6 +26,7 @@ public class StartUI : MonoBehaviour
 
     public void Gamestart()
     {
+        txtobj.SetActive(false);
         Time.timeScale = 1f;
         PauseMenu.GameIsPaused = false;
         UICube.SetActive(true);

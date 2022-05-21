@@ -52,6 +52,7 @@ public class TimeTrig : MonoBehaviour
 
     void Pickup()
     {
+        Time.timeScale = 0f;
         PauseMenuUI.SetActive(false);
         UICube.SetActive(false);
         HUDUI.SetActive(false);

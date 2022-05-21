@@ -8,6 +8,7 @@ public class MenuButtonManager : MonoBehaviour
 {
     public GameObject GameStartUI;
     public GameObject MenuUI;
+    public GameObject InfoUI;
 
      public void ClickStart()
      {
@@ -24,12 +25,20 @@ public class MenuButtonManager : MonoBehaviour
     public void InfoScene()
     {
         Debug.Log("Loading Info...");
-        SceneManager.LoadScene("Info");
+        InfoUI.SetActive(true);
+        MenuUI.SetActive(false);
     }
 
     public void QuitGame()
     {
         Debug.Log("Quitting Game...");
         Application.Quit();
+    }
+
+    public void MenuBack()
+    {
+        Debug.Log("Loading Menu...");
+        MenuUI.SetActive(true);
+        InfoUI.SetActive(false);
     }
 }
